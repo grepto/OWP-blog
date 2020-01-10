@@ -92,13 +92,23 @@ def set_tags(session):
     session.commit()
 
 
+def initialize():
+    """Creating database and load some demo content
+
+    Run only if you need database with demo data"""
+
+    crate_users_and_posts(session, 'Tuchka')
+    crate_users_and_posts(session, 'Kesha')
+    create_tags(session)
+    set_tags(session)
+
+
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
     session = Session()
-    # crate_users_and_posts(session, 'Tuchka')
-    # crate_users_and_posts(session, 'Kesha')
-    # create_tags(session)
-    # set_tags(session)
+
+    # uncomment row below in first launch
+    # initialize()
 
     q = session.query(Post)\
         .join(User)\
