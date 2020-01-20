@@ -32,6 +32,9 @@ class User(Base):
 
     posts = relationship('Post', back_populates='author')
 
+    def __repr__(self):
+        return f'<User #{self.id} - {self.username}>'
+
 
 class Post(Base):
     __tablename__ = 'posts'
